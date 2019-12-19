@@ -11,6 +11,7 @@ const AppNavigator = createStackNavigator(
         Home: {
             screen: HomeScreen,
             navigationOptions: {
+                title: "Delta test app",
                 headerStyle: {
                     backgroundColor: "darkblue"
                 },

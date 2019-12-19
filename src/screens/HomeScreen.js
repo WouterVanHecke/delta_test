@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView } from "react-native";
 
-class HomeScreen extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: "Delta test app"
-        };
+import CoinsList from "../redux/components/CoinsList";
+
+export default HomeScreen = props => {
+    const goToDetails = item => {
+        props.navigation.navigate("Details", item);
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    render() {
-        return <View></View>;
-    }
-}
+    return (
+        <SafeAreaView style={styles.container}>
+            <CoinsList goToDetails={goToDetails} />
+        </SafeAreaView>
+    );
+};
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+    container: { flex: 1, backgroundColor: "#f2f2f2" }
+});
