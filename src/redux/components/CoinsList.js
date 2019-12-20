@@ -2,15 +2,11 @@ import React, { Component } from "react";
 import { View, StyleSheet, Image, Text, ActivityIndicator, FlatList, TouchableNativeFeedback } from "react-native";
 import { connect } from "react-redux";
 
-import { fetchCoins } from "../actions/coinsActions";
+import { fetchCoins, setPage } from "../actions/coinsActions";
 
 class CoinsList extends Component {
-    state = {
-        page: 1
-    };
-
     componentDidMount() {
-        this.props.fetchCoins(this.state.page);
+        this.props.fetchCoins(1);
     }
 
     _formatNumber(value) {
@@ -28,22 +24,15 @@ class CoinsList extends Component {
         return false;
     }
 
-    _formatNegativeNumber(value) {
-        const positive = this._checkForPositiveNumber(value);
-        if (!positive) return value.toString().substring(1);
-        return value;
-    }
-
     _onRefresh = () => {
-        this.setState({ page: 1 }, () => {
-            this.props.fetchCoins(this.state.page);
-        });
+        this.props.setPage(1);
+        this.props.fetchCoins(1);
     };
 
     _fetchMoreData = () => {
-        this.setState({ page: this.state.page + 1 }, () => {
-            this.props.fetchCoins(this.state.page);
-        });
+        const { page } = this.props;
+        this.props.setPage(page + 1);
+        this.props.fetchCoins(page + 1);
     };
 
     _goToDetailsScreen = item => {
@@ -79,7 +68,7 @@ class CoinsList extends Component {
                                     color: this._checkForPositiveNumber(item.percentChange24h) ? "green" : "red"
                                 }}
                             >
-                                {this._formatNegativeNumber(item.percentChange24h.toFixed(2))} %
+                                {item.percentChange24h.toFixed(2)} %
                             </Text>
                         </View>
                     </View>
@@ -126,13 +115,15 @@ class CoinsList extends Component {
 const mapStateToProps = state => {
     return {
         coins: state.coinsReducer.coins,
-        loading: state.coinsReducer.loading
+        loading: state.coinsReducer.loading,
+        page: state.coinsReducer.page
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchCoins: page => dispatch(fetchCoins(page))
+        fetchCoins: page => dispatch(fetchCoins(page)),
+        setPage: page => dispatch(setPage(page))
     };
 };
 

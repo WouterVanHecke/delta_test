@@ -1,5 +1,5 @@
 import { getApiUrl } from "./apiActions";
-import { COINS_FETCH_INITIAL_SUCCESS, COINS_FETCH_MORE_SUCCESS } from "./actionTypes";
+import { COINS_FETCH_INITIAL_SUCCESS, COINS_FETCH_MORE_SUCCESS, SET_PAGE } from "./actionTypes";
 
 const fetchInitialSuccess = coins => ({
     type: COINS_FETCH_INITIAL_SUCCESS,
@@ -26,3 +26,8 @@ export const fetchCoins = page => {
             .catch(err => console.error(err));
     };
 };
+
+export const setPage = page => ({
+    type: SET_PAGE,
+    payload: { page }
+});

@@ -1,10 +1,11 @@
 import { REHYDRATE } from "redux-persist";
 
-import { COINS_FETCH_INITIAL_SUCCESS, COINS_FETCH_MORE_SUCCESS } from "../actions/actionTypes";
+import { COINS_FETCH_INITIAL_SUCCESS, COINS_FETCH_MORE_SUCCESS, SET_PAGE } from "../actions/actionTypes";
 
 const initialState = {
     loading: true,
-    coins: []
+    coins: [],
+    page: 1
 };
 
 const coinsReducer = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const coinsReducer = (state = initialState, action) => {
         case REHYDRATE:
             newState.loading = false;
             newState.coins = action.payload.coinsReducer.coins;
+            newState.page = action.payload.coinsReducer.page;
             return newState;
 
         case COINS_FETCH_INITIAL_SUCCESS:
@@ -23,6 +25,10 @@ const coinsReducer = (state = initialState, action) => {
         case COINS_FETCH_MORE_SUCCESS:
             newState.loading = false;
             newState.coins = [...state.coins, ...action.payload.coins];
+            return newState;
+
+        case SET_PAGE:
+            newState.page = action.payload.page;
             return newState;
 
         default:
