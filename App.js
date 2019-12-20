@@ -9,7 +9,7 @@ import { store, persistor } from "./src/redux/store";
 export default function App() {
     return (
         <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
+            <PersistGate persistor={persistor}>
                 <AppContainer />
             </PersistGate>
         </Provider>
