@@ -5,7 +5,7 @@ import CoinsList from "../redux/components/CoinsList";
 
 export default HomeScreen = props => {
     const goToDetails = item => {
-        props.navigation.navigate("Details", item);
+        props.navigation.push("Details", { item });
     };
 
     return (
