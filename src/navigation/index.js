@@ -11,15 +11,7 @@ const AppNavigator = createStackNavigator(
         Home: {
             screen: HomeScreen,
             navigationOptions: {
-                title: "Delta test app",
-                headerStyle: {
-                    backgroundColor: "darkblue"
-                },
-                headerTintColor: "#fff",
-                headerTitleStyle: {
-                    fontWeight: "bold",
-                    fontSize: 22
-                }
+                title: "Delta test app"
             }
         },
         Details: {
@@ -27,7 +19,17 @@ const AppNavigator = createStackNavigator(
         }
     },
     {
-        initialRouteName: "Home"
+        initialRouteName: "Home",
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: "darkblue"
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+                fontWeight: "bold",
+                fontSize: 22
+            }
+        }
     }
 );
 

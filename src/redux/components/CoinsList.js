@@ -2,26 +2,12 @@ import React, { Component } from "react";
 import { View, StyleSheet, Image, Text, ActivityIndicator, FlatList, TouchableNativeFeedback } from "react-native";
 import { connect } from "react-redux";
 
+import { formatNumber, checkForPositiveNumber } from "../../utils/dataFormatter";
 import { fetchCoins, setPage } from "../actions/coinsActions";
 
 class CoinsList extends Component {
     componentDidMount() {
         this.props.fetchCoins(1);
-    }
-
-    _formatNumber(value) {
-        var suffixes = ["", "K", "M", "B", "T"];
-        var suffixNum = Math.floor(("" + value).length / 3);
-        var shortValue = parseFloat((suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(2));
-        if (shortValue % 1 != 0) {
-            shortValue = shortValue.toFixed(2);
-        }
-        return shortValue + " " + suffixes[suffixNum];
-    }
-
-    _checkForPositiveNumber(value) {
-        if (Math.sign(value) === 1) return true;
-        return false;
     }
 
     _onRefresh = () => {
@@ -55,7 +41,7 @@ class CoinsList extends Component {
                                 {item.name.substring(0, 16)}
                                 {item.name.length > 16 && "..."}
                             </Text>
-                            <Text style={styles.mcStyle}>${this._formatNumber(item.marketCapInUSD.toFixed(0))}</Text>
+                            <Text style={styles.mcStyle}>${formatNumber(item.marketCapInUSD.toFixed(0))}</Text>
                         </View>
                         <View style={{ ...styles.info }}>
                             <Text style={{ ...styles.nameStyle, textAlign: "right" }}>
@@ -65,7 +51,7 @@ class CoinsList extends Component {
                                 style={{
                                     ...styles.mcStyle,
                                     textAlign: "right",
-                                    color: this._checkForPositiveNumber(item.percentChange24h) ? "green" : "red"
+                                    color: checkForPositiveNumber(item.percentChange24h) ? "green" : "red"
                                 }}
                             >
                                 {item.percentChange24h.toFixed(2)} %
