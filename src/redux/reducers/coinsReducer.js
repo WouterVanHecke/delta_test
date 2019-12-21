@@ -13,7 +13,7 @@ const coinsReducer = (state = initialState, action) => {
     switch (action.type) {
         case REHYDRATE:
             newState.loading = false;
-            newState.coins = action.payload.coinsReducer.coins;
+            newState.coins = action.payload.coinsReducer.coins.slice(0, 21);
             newState.page = action.payload.coinsReducer.page;
             return newState;
 

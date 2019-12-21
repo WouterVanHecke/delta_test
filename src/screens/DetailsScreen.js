@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, SafeAreaView, Image, Text } from "react-native";
 import NumberFormat from "react-number-format";
 
-import { formatNumber2, checkForPositiveNumber } from "../utils/dataFormatter";
+import { formatFullNumber, checkForPositiveNumber } from "../utils/dataFormatter";
 
 export default DetailsScreen = props => {
     const item = props.navigation.getParam("item");
@@ -16,7 +16,7 @@ export default DetailsScreen = props => {
                 />
                 <View style={styles.mainInfo}>
                     <Text style={styles.marketCapTextStyle}>Number {item.marketCapRank}</Text>
-                    <Text style={styles.priceTextStyle}>$ {formatNumber2(item.priceInUSD)}</Text>
+                    <Text style={styles.priceTextStyle}>$ {formatFullNumber(item.priceInUSD)}</Text>
                 </View>
             </View>
         );
@@ -96,24 +96,6 @@ export default DetailsScreen = props => {
         );
     };
 
-    /*
-    "item": Object {
-          "availableSupply": 108975022.499,
-          "code": "eth",
-          "dirtyCode": "ETH",
-          "id": "V1Y7OX",
-          "marketCapInUSD": 14018370015.82259,
-          "marketCapRank": 2,
-          "name": "Ethereum",
-          "percentChange1h": 0.00635471,
-          "percentChange24h": 1.37014,
-          "percentChange7d": -10.8698,
-          "priceInUSD": 128.63918447,
-          "slug": "ethereum",
-          "totalSupply": 108975022.499,
-          "volume24hInUSD": 8306214647.92549,
-          */
-
     return (
         <SafeAreaView style={styles.container}>
             {_renderMainContainer()}
@@ -121,8 +103,6 @@ export default DetailsScreen = props => {
         </SafeAreaView>
     );
 };
-
-// "priceInUSD": 128.63918447, "marketCapRank": 2
 
 DetailsScreen.navigationOptions = screenProps => {
     const title = screenProps.navigation.getParam("item").name;
@@ -174,11 +154,5 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: "grey"
     },
-    infoTextStyle: { fontSize: 17, fontWeight: "800" },
-    leftColumn: {
-        width: "60%"
-    },
-    rightColumn: {
-        width: "40%"
-    }
+    infoTextStyle: { fontSize: 17, fontWeight: "800" }
 });

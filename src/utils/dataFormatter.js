@@ -8,7 +8,7 @@ export function formatNumber(value) {
     return shortValue + " " + suffixes[suffixNum];
 }
 
-export const formatNumber2 = value => {
+export const formatFullNumber = value => {
     return value.toLocaleString(undefined, { minimumFractionDigits: 2 });
 };
 
