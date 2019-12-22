@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Image, Text, ActivityIndicator, FlatList, TouchableNativeFeedback } from "react-native";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { formatNumber, checkForPositiveNumber } from "../../utils/dataFormatter";
 import { fetchCoins, setPage } from "../actions/coinsActions";
@@ -114,6 +115,14 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinsList);
+
+CoinsList.propTypes = {
+    coins: PropTypes.arrayOf(PropTypes.object),
+    loading: PropTypes.bool,
+    page: PropTypes.number,
+    fetchCoins: PropTypes.func,
+    setPage: PropTypes.func
+};
 
 const styles = StyleSheet.create({
     container: { flex: 1 },
