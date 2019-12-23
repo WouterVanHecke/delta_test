@@ -1,8 +1,17 @@
 # ASSIGNMENT
 
-This app is an initiation test for delta created with Expo
+This app is an initiation test for delta ejected from Expo
 
 ## RUN PROJECT
 
 First install the dependencies with "yarn" or "npm install"
-Then start the project with "expo start" (or expo android / expo ios)
+
+Before running your app on iOS, make sure you have CocoaPods installed and initialize the project:
+
+cd ios
+pod install
+
+Then you can run the project:
+
+yarn android
+yarn ios
